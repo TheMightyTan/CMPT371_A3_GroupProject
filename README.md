@@ -11,7 +11,7 @@ Semester: Spring 2026
 | Name         | Student ID  | Email           |
 | ------------ | ----------- | ----------------|
 | Tanvir Samra | 301-571-825 | [tss19@sfu.ca]  |
-| Krish Mann   | 301-565-069 |                 |
+| Krish Mann   | 301-565-069 | [kma133@sfu.ca] |
 
 ---
 
