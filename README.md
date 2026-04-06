@@ -27,21 +27,38 @@ The client is implemented using Tkinter and allows users to connect, enter their
 
 ## 2. System Limitations & Edge Cases
 
-Handling Multiple Clients Concurrently:
-Solution: The server uses Python’s threading module. Each pair of clients is assigned to a separate game session thread so multiple games can run simultaneously.
-Limitation: Threads are limited by system resources. A more scalable approach would use asyncio or a thread pool.
+### Handling Multiple Clients Concurrently
+**Solution:**  
+The server uses Python’s threading module. Each pair of clients is assigned to a separate game session thread so multiple games can run simultaneously.  
 
-TCP Stream Buffering:
-Solution: Since TCP is a byte stream, messages can combine. Each JSON message is terminated with a newline `\n` and processed line-by-line.
+**Limitation:**  
+Threads are limited by system resources. A more scalable approach would use asyncio or a thread pool.
 
-Input Validation & Security:
-Solution: The server validates ship placements and attack coordinates.
-Limitation: The server assumes properly formatted JSON messages. A malicious client could send unexpected data.
+---
 
-Fixed Game Configuration:
-Board size is fixed at 7x7 and ship sizes are [4, 3, 2]. These values are not configurable.
+### TCP Stream Buffering
+**Solution:**  
+Since TCP is a byte stream, messages can combine. Each JSON message is terminated with a newline `\n` and processed line-by-line.
 
-Localhost Restriction:
+---
+
+### Input Validation & Security
+**Solution:**  
+The server validates ship placements and attack coordinates.  
+
+**Limitation:**  
+The server assumes properly formatted JSON messages. A malicious client could send unexpected data.
+
+---
+
+### Fixed Game Configuration
+- Board size is fixed at 7x7  
+- Ship sizes are [4, 3, 2]  
+- These values are not configurable  
+
+---
+
+### Localhost Restriction
 The game runs on 127.0.0.1. To support remote play, the IP must be changed.
 
 ---
