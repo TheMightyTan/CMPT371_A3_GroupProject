@@ -5,14 +5,14 @@ import threading
 import tkinter as tk
 from tkinter import messagebox
 
-HOST = "127.0.0.1"
+HOST = "127.0.0.1" #The Default Connection settings
 PORT = 5050
 
-BOARD_SIZE = 7
+BOARD_SIZE = 7 #Can change the board size/settings
 CELL_SIZE = 40
 MARGIN = 35
 
-COLOR_WATER = "#b7dfff"
+COLOR_WATER = "#b7dfff" #These are the color contents for the UI/Board
 COLOR_SHIP = "#7a7a7a"
 COLOR_HIT = "#ff5c5c"
 COLOR_MISS = "#ffffff"
@@ -21,10 +21,14 @@ COLOR_PREVIEW_OK = "#98fb98"
 COLOR_PREVIEW_BAD = "#ffb6c1"
 
 def send_json(sock, data):
+    """Converts a dict into JSON which can be sent over the socket; the newline is so that
+    the content can be read line by line; it is basically a delimineter"""
     message = json.dumps(data) + "\n"
     sock.sendall(message.encode("utf-8"))
 
 def recv_json(file_obj):
+    """Each line is read from the socket, parsed as JSON, and returns the line;
+    If the connection is either closed or an error occurs, None is returned and dealt with later"""
     try:
         line = file_obj.readline()
         if not line:
@@ -34,18 +38,23 @@ def recv_json(file_obj):
         return None
 
 class BattleshipGUI:
-    def __init__(self, root):
+    """Sets up the GUI and game state by setting up the networking variables, the board and starts the
+    UI and the message processing loop"""
+    def __init__(self, root): 
         self.root = root
         self.root.title("Battleship Client")
+        """Socket connection"""
         self.sock = None
         self.sock_file = None
         self.running = False
         self.connected = False
-        self.msg_queue = queue.Queue()
+        self.msg_queue = queue.Queue() #Important to ensure that the queue is thread-safe
+        """This is for the game state"""
         self.phase = "connect"
         self.your_turn = False
         self.place_length = None
         self.direction = "H"
+        """The Boards that each user will see"""
         self.your_board = [["~" for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
         self.enemy_board = [["~" for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
         self.hover_row = None
@@ -53,8 +62,8 @@ class BattleshipGUI:
 
         self.build_ui()
         self.draw_boards()
-        self.root.after(100, self.process_messages)
-        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+        self.root.after(100, self.process_messages) #!Important: this will process server messages; have to have this
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close) #This will make sure that the window is closed safely
 
     def build_ui(self):
         top = tk.Frame(self.root)
@@ -264,6 +273,7 @@ class BattleshipGUI:
             messagebox.showerror("Error", str(exc))
 
     def draw_boards(self):
+        """This function will make sure to re-draw both boards for player and opponet"""
         self.draw_single_board(self.your_canvas, self.your_board, reveal_ships=True, preview=True)
         self.draw_single_board(self.enemy_canvas, self.enemy_board, reveal_ships=False, preview=False)
 
@@ -313,6 +323,7 @@ class BattleshipGUI:
         self.status_label.config(text=text)
 
     def on_close(self):
+        """This will close the client connection and safely close the GUI"""
         self.running = False
         self.connected = False
         try:
