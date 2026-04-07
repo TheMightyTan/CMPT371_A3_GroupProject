@@ -215,6 +215,7 @@ class BattleshipGUI:
             self.set_status(msg.get("message", "Game over"))
             self.draw_boards()
             messagebox.showinfo("Game Over", msg.get("message", "Game over"))
+            self.root.after(100,self.on_close)
         elif msg_type == "_DISCONNECT":
             self.running = False
             self.connected = False
