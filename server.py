@@ -208,6 +208,18 @@ class GameSession:
                     player.send_json({"type": "ERROR", "message": "Cannot place ship there."})
                     continue
                 place_ship(my_board, row, col, direction, length)
+
+                ok = self.send_state(
+                    player=player,
+                    your_board=my_board,
+                    enemy_board=hidden_enemy_board(enemy_board),
+                    phase="placement",
+                    your_turn=False,
+                    message=f"{player.name}: placed ship of length {length}",
+                    place_length = None,
+                )
+                if not ok:
+                    return False
                 break
         return True
 
