@@ -132,10 +132,14 @@ Once both players connect:
 ```
 Matched! Player 1 / Player 2
 ```
+<img width="343" height="83" alt="Screenshot 2026-04-07 at 2 13 25 PM" src="https://github.com/user-attachments/assets/4c8e0582-0f85-4515-8d8d-103c5ccd5eb3" />
 
 Step 4: Ship Placement
 Each player places ships in order: length 4, then 3, then 2.
 Select direction (horizontal or vertical), hover to preview, and click to place ships. Invalid placements are rejected.
+
+<img width="1433" height="559" alt="Screenshot 2026-04-07 at 2 12 32 PM" src="https://github.com/user-attachments/assets/fb7fbffd-58de-4a97-b0c7-e50d9d46c0b8" />
+
 
 Step 5: Gameplay
 Players take turns clicking on the opponent’s board to attack.
@@ -145,6 +149,8 @@ Results:
 
 * Hit → X
 * Miss → O
+
+<img width="1436" height="560" alt="Screenshot 2026-04-07 at 2 14 55 PM" src="https://github.com/user-attachments/assets/7cb2efb1-cce4-4a5d-89e5-a681d2c67f5c" />
 
 Step 6: Game Termination
 The game ends when all ships of one player are sunk.
