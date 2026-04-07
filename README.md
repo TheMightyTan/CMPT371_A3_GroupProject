@@ -65,7 +65,7 @@ The game runs on 127.0.0.1. To support remote play, the IP must be changed.
 
 ## 3. Video Demo
 
-▶️ [Watch Project Demo](ADD_YOUR_LINK_HERE)
+▶️ [Watch Project Demo](https://www.youtube.com/watch?v=bZX63Cg90Ac)
 
 ---
 
