@@ -155,7 +155,7 @@ Results:
 Step 6: Game Termination
 The game ends when all ships of one player are sunk.
 A message will display "You win!" or "You lose."
-The connection closes automatically.
+The connection closes automatically. The Server continues to run for incoming client connections; To close Server, do Control + C in VSCode
 
 ---
 
